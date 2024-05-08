@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
+import CartProvider from "./components/Provider";
+import ShoppingCartModal from "./components/ShoppingCartModal";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,10 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cupcake">
       <body className={poppins.className}>
-        <NavBar />
-        {children}
+        <CartProvider>
+          <NavBar />
+          <ShoppingCartModal />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

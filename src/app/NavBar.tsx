@@ -1,16 +1,55 @@
-import Image from "next/image";
-import React from "react";
-import logo from "../../public/logo.png";
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useShoppingCart } from "use-shopping-cart";
+
+const links = [
+  { name: "Home", href: "/" },
+  { name: "Clothing", href: "/Clothing" },
+  { name: "Footwears", href: "/Footwears" },
+  { name: "Jewelries", href: "/Jewelries" },
+];
 
 const NavBar = () => {
+  const pathname = usePathname();
+  const { handleCartClick } = useShoppingCart();
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 border-b border-black mb-5 ">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Neysam luxury</a>
+        <a className="btn btn-ghost text-xl mr-60">
+          Neysam <span className="text-primary">luxury</span>
+        </a>
+        <nav className="hidden gap-10 lg:flex 2xl:ml-16 ">
+          {links.map((link, index) => (
+            <div key={index}>
+              {pathname === link.href ? (
+                <Link
+                  className="text-lg font-semibold text-primary"
+                  href={link.href}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <Link
+                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary"
+                  href={link.href}
+                >
+                  {link.name}
+                </Link>
+              )}
+            </div>
+          ))}
+        </nav>
       </div>
+
       <div className="flex-none">
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle"
+            onClick={() => handleCartClick()}
+          >
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,19 +65,6 @@ const NavBar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm indicator-item">8</span>
-            </div>
-          </div>
-          <div
-            tabIndex={0}
-            className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-          >
-            <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
-              </div>
             </div>
           </div>
         </div>
