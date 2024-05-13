@@ -10,7 +10,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       cartMode="client-only"
       mode="payment"
       stripe={process.env.NEXT_PUBLIC_STRIPE_KEY as string}
-      successUrl="http://localhost:3000/success"
+      successUrl="http://localhost:3000/paystack/success"
       cancelUrl="http://localhost:3000/error"
       currency="NGN"
       billingAddressCollection={true}

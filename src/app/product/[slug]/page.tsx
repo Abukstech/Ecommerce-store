@@ -82,6 +82,7 @@ const Productpage = async ({ params }: { params: { slug: string } }) => {
                 image={data.images[0]}
                 price={data.price}
                 key={data._id}
+                id={data._id}
               />
               <button className="btn btn-secondary rounded-md ">
                 Checkout Now

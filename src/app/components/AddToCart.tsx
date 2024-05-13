@@ -8,6 +8,7 @@ interface ShoppingCart {
   description: string;
   currency: string;
   image: any;
+  id: string;
 }
 
 const AddToCart = ({
@@ -16,6 +17,7 @@ const AddToCart = ({
   description,
   currency,
   image,
+  id,
 }: ShoppingCart) => {
   const { addItem, handleCartClick } = useShoppingCart();
 
@@ -25,7 +27,7 @@ const AddToCart = ({
     description,
     currency,
     images: urlFor(image).url(),
-    id: "ladgshl",
+    id,
   };
   return (
     <button
