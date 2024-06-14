@@ -14,7 +14,8 @@ interface Props {
 }
 
 async function getData() {
-  const query = `*[_type == 'product'][0...4] | order(_createdAt desc ){
+  
+  const query = `*[_type == 'product'][1...5] | order(_createdAt desc ){
     _id,
     price,
     name,
@@ -22,7 +23,8 @@ async function getData() {
     "categoryName": category->name,
     "imageUrl": images[0].asset->url
     
-}`;
+}`
+
   const data = await client.fetch(query);
 
   return data;

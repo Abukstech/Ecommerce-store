@@ -26,7 +26,7 @@ const AddToCart = ({
     price,
     description,
     currency,
-    images: urlFor(image).url(),
+    image: urlFor(image).url(),
     id,
   };
   return (

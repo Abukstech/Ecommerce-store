@@ -1,14 +1,19 @@
+"use client";
+import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 import { usePaystackPayment } from "react-paystack";
 import { PaystackProps } from "react-paystack/dist/types";
 import { useShoppingCart } from "use-shopping-cart";
 
-const CheckOut = () => {
+const CheckOut = ({ isOpen, isClose }: any) => {
   const { cartDetails, totalPrice } = useShoppingCart();
 
+  const router = useRouter();
+
   const publicKey = process.env.NEXT_PUBLIC_STRIPE_KEY as string;
-  const amount = totalPrice as number;
+  const amount = (totalPrice! * 100) as number;
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,17 +21,20 @@ const CheckOut = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
+  const [phone, setPhone] = useState("");
 
   const config: PaystackProps = {
     email: email,
     amount: amount,
     publicKey,
+    firstname: fullName,
   };
 
   const initializePayment: any = usePaystackPayment(config);
 
   const onSuccess: any = () => {
     alert("success");
+    router.push("/paystack/success");
   };
 
   const onClose: any = () => {
@@ -36,105 +44,151 @@ const CheckOut = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     initializePayment(onClose, onSuccess);
+    isClose();
   };
 
-  return (
-    <div>
-      <center>
-        <h1 className="checkout-text">Checkout</h1>
-      </center>
+  if (!isOpen) return null;
 
-      <div className="row">
-        <div className="col-50">
-          <div className="billing-info">
-            <form>
-              <div className="row">
-                <div className="col-50">
-                  <h3 className="checkout-text">Billing Address</h3>
-                  <label htmlFor="fname">
-                    <i className="fa fa-user" /> Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="fname"
-                    name="firstname"
-                    placeholder="John M. Doe"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                  />
-                  <p>{fullName}</p>
-                  <label htmlFor="email">
-                    <i className="fa fa-envelope" /> Email
-                  </label>
-                  <input
-                    type="text"
-                    id="email"
-                    name="email"
-                    placeholder="john@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <p>{email}</p>
-                  <label htmlFor="adr">
-                    <i className="fa fa-address-card-o" /> Address
-                  </label>
-                  <input
-                    type="text"
-                    id="adr"
-                    name="address"
-                    placeholder="542 W. 15th Street"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                  <label htmlFor="city">
-                    <i className="fa fa-institution" /> City
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    placeholder="New York"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                  />
-                  <div className="row">
-                    <div className="col-50">
-                      <label htmlFor="state">State</label>
-                      <input
-                        type="text"
-                        id="state"
-                        name="state"
-                        placeholder="NY"
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                      />
-                    </div>
-                    <div className="col-50">
-                      <label htmlFor="zip">Zip</label>
-                      <input
-                        type="text"
-                        id="zip"
-                        name="zip"
-                        placeholder="10001"
-                        value={zip}
-                        onChange={(e) => setZip(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <label>
-                <input type="checkbox" name="sameadr" /> Shipping address same
-                as billing
-              </label>
-              <center>
-                <button onClick={handleSubmit} className="btn">
-                  Pay with Paystack
-                </button>
-              </center>
-            </form>
-          </div>
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+        <button
+          type="button"
+          className="absolute top-0 right-0 m-4 text-gray-600 hover:text-gray-800"
+          onClick={() => {
+            isClose();
+          }}
+        >
+          <X />
+        </button>
+
+        <div className="my-5 text-center text-primary text-base font-semibold">
+          Enter Your Shipping Details To Process Your Order
         </div>
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="fname">Full Name</label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="fname"
+                  name="firstname"
+                  placeholder="John M. Doe"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="email">
+                <i className="fa fa-envelope" /> Email
+              </label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="john@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="adr">
+                <i className="fa fa-address-card-o" /> Address
+              </label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="adr"
+                  name="address"
+                  placeholder="542 W. 15th Street"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="city">City</label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="New York"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="state">State</label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="state"
+                  name="state"
+                  placeholder="NY"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="zip">Zip</label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  placeholder="10001"
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="zip">Phone Number</label>
+              <div className="bg-transparent">
+                <input
+                  type="text"
+                  id="zip"
+                  name="phone"
+                  placeholder=""
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="border-primary border-2 px-2 w-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label className="block mt-4">
+            <input type="checkbox" defaultChecked name="sameadr" /> Shipping
+            address same as billing
+          </label>
+          <div className="text-center mt-6">
+            <button
+              type="submit"
+              className="btn bg-primary text-white px-4 py-2 rounded"
+            >
+              Pay with Paystack
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
