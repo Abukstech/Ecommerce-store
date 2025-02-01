@@ -54,20 +54,20 @@ const Hero = async () => {
         <div className="flex h-12 divide-x overflow-hidden rounded-lg border">
           <Link
             href="/Clothing"
-            className="flex w-40 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            className="flex w-40 text-secondary items-center justify-center  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Clothing
           </Link>
           <Link
             href="/Footwears"
-            className="flex w-40 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            className="flex w-40 items-center justify-center text-secondary  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Footwears
           </Link>
 
           <Link
             href="/Jewelries"
-            className="flex w-40 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            className="flex w-40 items-center justify-center text-secondary  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Jewelries
           </Link>

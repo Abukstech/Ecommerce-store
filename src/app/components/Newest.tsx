@@ -33,10 +33,10 @@ const Newest = async () => {
   const data: Props[] = await getData();
 
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold tracking-tighter text-gray-900">
+          <h2 className="text-2xl font-bold tracking-tighter text-primary">
             Our Newest Products
           </h2>
 

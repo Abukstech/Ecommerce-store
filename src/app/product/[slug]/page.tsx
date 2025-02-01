@@ -34,7 +34,7 @@ const Productpage = async ({ params }: { params: { slug: string } }) => {
 
   const discounted = 0.1 * data.price;
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
         <div className="grid gap-8 md:grid-cols-2">
           <ImageGallery images={data.images} />
