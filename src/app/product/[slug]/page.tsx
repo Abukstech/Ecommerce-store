@@ -84,9 +84,9 @@ const Productpage = async ({ params }: { params: { slug: string } }) => {
                 key={data._id}
                 id={data._id}
               />
-              <button className="btn btn-secondary rounded-md ">
+              {/* <button className="btn btn-secondary rounded-md ">
                 Checkout Now
-              </button>
+              </button> */}
             </div>
             <p className="mt-14 text-base text-gray-500  tracking-wider">
               {data.description}

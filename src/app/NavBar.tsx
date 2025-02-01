@@ -16,7 +16,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 border-b border-black mb-5 ">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl mr-60">
+        <a href="/" className="btn btn-ghost text-xl mr-60">
           Neysam <span className="text-primary">luxury</span>
         </a>
         <nav className="hidden gap-10 lg:flex 2xl:ml-16 ">
