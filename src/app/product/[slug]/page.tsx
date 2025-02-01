@@ -57,7 +57,7 @@ const Productpage = async ({ params }: { params: { slug: string } }) => {
             </div>
             <div className="mb-4">
               <div className="flex items-end gap-2">
-                <span className="text-xl font-bold text-gray-800 md:text-2xl">
+                <span className="text-xl font-bold text-primary md:text-2xl">
                   <span>&#8358;</span>
                   {data.price}
                 </span>

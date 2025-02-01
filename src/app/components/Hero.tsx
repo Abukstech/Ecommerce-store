@@ -51,23 +51,23 @@ const Hero = async () => {
       </div>
 
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-        <div className="flex h-12 divide-x overflow-hidden rounded-lg border">
+        <div className="flex h-12 divide-x overflow-hidden rounded-lg border" >
           <Link
             href="/Clothing"
-            className="flex w-40 text-secondary items-center justify-center  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            className="flex sm:w-40 w-24  text-secondary items-center justify-center  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Clothing
           </Link>
           <Link
             href="/Footwears"
-            className="flex w-40 items-center justify-center text-secondary  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            className="flex sm:w-40 w-24  items-center justify-center text-secondary  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Footwears
           </Link>
 
           <Link
             href="/Jewelries"
-            className="flex w-40 items-center justify-center text-secondary  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            className="flex sm:w-40 w-24 items-center justify-center text-secondary  transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Jewelries
           </Link>
